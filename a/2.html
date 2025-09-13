@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Moments - Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* A more natural, calming color palette */
+            --primary: #52796F;
+            --secondary: #84A98C;
+            --accent: #B88B4A;
+            --light: #F6F4F3;
+            --dark: #354F52;
+            --card-bg: #FFFFFF;
+            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            padding: 20px 0;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.2rem;
+            color: var(--accent);
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--dark);
+            box-shadow: 0 4px 12px rgba(184, 139, 74, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--light);
+            color: var(--light);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            padding-bottom: 50px;
+        }
+        
+        .profile-container {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        div.card + div.card {
+            margin-top: 25px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        
+        .card-title i {
+            color: var(--accent);
+        }
+
+        .profile-summary {
+            text-align: center;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .profile-summary h2 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .profile-summary p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .profile-summary .btn {
+            width: 100%;
+        }
+
+        .goals-grid {
+            margin-top: 20px;
+            display: grid;
+            gap: 15px;
+        }
+
+        .goal-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: 8px;
+            border-left: 5px solid var(--secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .goal-item:hover {
+            transform: translateX(5px);
+        }
+
+        .goal-item.completed {
+            border-left-color: #28a745;
+            opacity: 0.9;
+        }
+
+        .goal-item i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .goal-item.completed i {
+            color: #28a745;
+        }
+
+        .goal-content h4 {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .goal-progress {
+            font-size: 0.9em;
+            color: #888;
+        }
+        
+        .badges-grid {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+            color: #555;
+        }
+
+        .badge-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #e0e6e9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .badge:hover .badge-icon {
+            transform: scale(1.1) rotate(10deg);
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+
+        .badge-icon.unlocked {
+            background-color: var(--accent);
+            color: var(--dark);
+            box-shadow: 0 4px 12px rgba(184, 139, 74, 0.4);
+        }
+
+        .badge-label {
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .recent-activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .recent-activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .activity-content {
+            flex-grow: 1;
+        }
+        
+        .activity-content h4 {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .activity-content p {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        /* NEW CHART STYLES */
+        .chart-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .chart-description {
+            color: var(--secondary);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .placeholder-chart {
+            height: 200px;
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-style: italic;
+            border: 2px dashed #ccc;
+        }
+
+        .placeholder-chart i {
+            margin-top: 10px;
+            font-size: 1.5rem;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <h1>Mindful Moments</h1>
+                </div>
+                <nav aria-label="Main Navigation">
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                        <li><a href="trends.html"><i class="fas fa-chart-line"></i> Trends</a></li>
+                        <li><a href="resources.html"><i class="fas fa-book"></i> Resources</a></li>
+                        <li><a href="#" class="active"><i class="fas fa-user"></i> Profile</a></li>
+                    </ul>
+                </nav>
+                <div class="user-actions">
+                    <button class="btn btn-outline" aria-label="Notifications"><i class="fas fa-bell"></i></button>
+                    <a href="#" class="btn btn-primary"><i class="fas fa-user"></i> Alex Johnson</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container profile-container">
+        <div class="card profile-summary">
+            <img src="https://via.placeholder.com/150" alt="Alex Johnson Profile" class="profile-picture">
+            <h2>Alex Johnson</h2>
+            <p>Your mental health champion. On a journey to find inner peace and balance. ✨</p>
+            <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i> Edit Profile</a>
+        </div>
+        
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-bullseye"></i> My Goals</h2>
+                    <a href="#" class="btn btn-primary" style="padding: 8px 15px;"><i class="fas fa-plus"></i> Add Goal</a>
+                </div>
+                <div class="goals-grid">
+                    <div class="goal-item completed">
+                        <i class="fas fa-check-circle"></i>
+                        <div class="goal-content">
+                            <h4>Complete 30-Day Meditation Challenge</h4>
+                            <div class="goal-progress">Completed on June 10, 2024</div>
+                        </div>
+                    </div>
+                    <div class="goal-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="goal-content">
+                            <h4>Practice Journaling 5x a week</h4>
+                            <div class="goal-progress">Progress: 3/5 completed this week</div>
+                        </div>
+                    </div>
+                    <div class="goal-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="goal-content">
+                            <h4>Schedule a weekly walk</h4>
+                            <div class="goal-progress">Progress: 1/1 completed this week</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-chart-line"></i> My Progress</h2>
+                </div>
+                <div class="chart-container">
+                    <p class="chart-description">Weekly Mood Trend: Excellent, Good, Fair, Poor</p>
+                    <div class="placeholder-chart">
+                        <p>AI-generated chart will appear here</p>
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-award"></i> My Badges</h2>
+                </div>
+                <div class="badges-grid">
+                    <div class="badge">
+                        <div class="badge-icon unlocked">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="badge-label">7-Day Streak</div>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon unlocked">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="badge-label">First Check-in</div>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon unlocked">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="badge-label">Mindful Master</div>
+                    </div>
+                    <div class="badge">
+                        <div class="badge-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <div class="badge-label">Community Member</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-history"></i> Recent Activity</h2>
+                </div>
+                <div class="recent-activity-list">
+                    <div class="recent-activity-item">
+                        <div class="activity-icon"><i class="fas fa-smile"></i></div>
+                        <div class="activity-content">
+                            <h4>Mood Check-in: Excellent</h4>
+                            <p>You checked in with an excellent mood today. Keep it up!</p>
+                        </div>
+                    </div>
+                    <div class="recent-activity-item">
+                        <div class="activity-icon"><i class="fas fa-book-open"></i></div>
+                        <div class="activity-content">
+                            <h4>Completed a Guided Meditation</h4>
+                            <p>You completed a 10-minute guided meditation session.</p>
+                        </div>
+                    </div>
+                    <div class="recent-activity-item">
+                        <div class="activity-icon"><i class="fas fa-book-reader"></i></div>
+                        <div class="activity-content">
+                            <h4>Journal Entry</h4>
+                            <p>You wrote a journal entry today about your productivity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Mindful Moments</h3>
+            <p>Your mental health journey matters. We're here to support you every step of the way.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Resources</a>
+            </div>
+            <p>&copy; 2023 Mindful Moments. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

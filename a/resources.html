@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Moments - Resources</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #52796F;
+            --secondary: #84A98C;
+            --accent: #B88B4A; /* Official color update */
+            --light: #F6F4F3;
+            --dark: #354F52;
+            --card-bg: #FFFFFF;
+            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light);
+            padding: 20px 0;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.2rem;
+            color: var(--accent);
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--light);
+            color: var(--light);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .resources-hero {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: var(--light);
+            padding: 80px 0;
+            text-align: center;
+            margin-top: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            position: relative;
+        }
+
+        .resources-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100 0L0 100V0H100Z' fill='%23ffffff' opacity='0.05'/%3E%3C/svg%3E");
+            background-size: 20px 20px;
+            opacity: 0.5;
+            z-index: 1;
+        }
+        
+        .resources-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .resources-hero-content h2 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .resources-hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .resources-container {
+            margin-top: 40px;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .search-bar input {
+            width: 500px;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 8px rgba(82, 121, 111, 0.2);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .resource-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .resource-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .resource-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .resource-card .btn-link {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .resource-card .btn-link:hover {
+            color: var(--accent);
+        }
+
+        .featured-section {
+            margin-top: 50px;
+        }
+
+        .featured-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .featured-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .featured-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .featured-item {
+            flex: 0 0 300px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-item:hover {
+            transform: scale(1.03);
+        }
+
+        .featured-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .featured-item h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .featured-item p {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .featured-item .btn-link {
+            color: var(--accent);
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .search-bar input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <h1>Mindful Moments</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                        <li><a href="trends.html"><i class="fas fa-chart-line"></i> Trends</a></li>
+                        <li><a href="#" class="active"><i class="fas fa-book"></i> Resources</a></li>
+                        <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                    </ul>
+                </nav>
+                <div class="user-actions">
+                    <button class="btn btn-outline"><i class="fas fa-bell"></i></button>
+                    <a href="profile.html" class="btn btn-primary"><i class="fas fa-user"></i> Alex Johnson</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="resources-hero">
+            <div class="resources-hero-content">
+                <h2>A Toolkit for Your Mind</h2>
+                <p>Explore a curated collection of articles, exercises, and professional resources to support your mental wellness journey.</p>
+            </div>
+        </section>
+
+        <section class="resources-container">
+            <div class="search-bar">
+                <input type="text" placeholder="Search resources, articles, or topics...">
+            </div>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="card-icon"><i class="fas fa-feather-alt"></i></div>
+                    <h3>Articles & Guides</h3>
+                    <p>Read expert-written articles on topics like stress management, resilience, and positive psychology.</p>
+                    <a href="#" class="btn-link">
+                        Explore Articles <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="card-icon"><i class="fas fa-headphones-alt"></i></div>
+                    <h3>Guided Meditations</h3>
+                    <p>Listen to guided audio sessions for mindfulness, sleep, anxiety relief, and focus.</p>
+                    <a href="#" class="btn-link">
+                        Start a Session <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="card-icon"><i class="fas fa-running"></i></div>
+                    <h3>Exercises & Activities</h3>
+                    <p>Find short, actionable exercises like breathing techniques and journaling prompts to use daily.</p>
+                    <a href="#" class="btn-link">
+                        Find an Activity <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="card-icon"><i class="fas fa-user-friends"></i></div>
+                    <h3>Professional Help</h3>
+                    <p>Access information on finding a therapist, mental health hotlines, and support groups near you.</p>
+                    <a href="#" class="btn-link">
+                        Get Support <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="card-icon"><i class="fas fa-podcast"></i></div>
+                    <h3>Books & Podcasts</h3>
+                    <p>Discover a curated list of books and podcasts to deepen your understanding of mental health.</p>
+                    <a href="#" class="btn-link">
+                        See Recommendations <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="card-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Wellness Workshops</h3>
+                    <p>Sign up for live or on-demand workshops on topics like stress reduction and emotional intelligence.</p>
+                    <a href="#" class="btn-link">
+                        View Schedule <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-section">
+            <h2>Featured Resources</h2>
+            <div class="featured-carousel">
+                <div class="featured-item">
+                    <img src="https://via.placeholder.com/300x150?text=Mindful+Breathing" alt="Featured 1">
+                    <h4>The 5-Minute Breathing Exercise</h4>
+                    <p>A simple yet powerful technique to calm your nervous system instantly.</p>
+                    <a href="#" class="btn-link">Start Now</a>
+                </div>
+                <div class="featured-item">
+                    <img src="https://via.placeholder.com/300x150?text=Gratitude+Journaling" alt="Featured 2">
+                    <h4>The Power of Gratitude Journaling</h4>
+                    <p>Learn how a daily gratitude practice can rewire your brain for happiness.</p>
+                    <a href="#" class="btn-link">Read Article</a>
+                </div>
+                <div class="featured-item">
+                    <img src="https://via.placeholder.com/300x150?text=Sleep+Hygiene" alt="Featured 3">
+                    <h4>Improve Your Sleep Hygiene</h4>
+                    <p>Practical tips for establishing a routine that leads to restful sleep.</p>
+                    <a href="#" class="btn-link">Read Guide</a>
+                </div>
+                <div class="featured-item">
+                    <img src="https://via.placeholder.com/300x150?text=Anxiety+Podcast" alt="Featured 4">
+                    <h4>"The Calm Collective" Podcast</h4>
+                    <p>Episode 24: Managing Anxiety in a Fast-Paced World. Listen to the latest episode.</p>
+                    <a href="#" class="btn-link">Listen Now</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Mindful Moments</h3>
+            <p>Your mental health journey matters. We're here to support you every step of the way.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Resources</a>
+            </div>
+            <p>&copy; 2023 Mindful Moments. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
